@@ -11,7 +11,7 @@
   fail:
     msg: >
       Provided value for 'ids_provider' is not valid
-      must be one of {{ids_provider_list}}
+      must be one of {{ ids_provider_list }}
   when: ids_provider not in ids_provider_list
 
 - name: apply config template for snort provider

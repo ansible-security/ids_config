@@ -15,7 +15,7 @@ galaxy_info:
   # - GPLv3
   # - Apache
   # - CC-BY
-  license: BSD
+  license: GPLv3
 
   min_ansible_version: 2.6
 
@@ -37,7 +37,7 @@ galaxy_info:
   # versions.
   #
   platforms:
-    - name: Red Hat Enterprise Linux
+    - name: RHEL
       versions:
         - 7
   #   - 25
