@@ -7,7 +7,7 @@ ids_provider: "snort"
 ids_provider_list:
   - snort
 
-ids_config_snort_version: 2.9.12
+ids_config_snort_version: 2.9.13
 
 ids_config_snort_rules_files:
   - app-detect
