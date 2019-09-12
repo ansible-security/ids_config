@@ -1,7 +1,7 @@
 ids_config
 ==========
 
-# This content is currently under development and should not be considered production ready
+# Tech Preview
 
 A role to provide configuration for many different Intrusion Detection Systems,
 these are defined as "providers" to the Role.
