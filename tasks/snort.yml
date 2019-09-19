@@ -6,14 +6,38 @@
     dest: /etc/snort/snort.conf
   notify: restart snort
 
-- name: handle remote logging if/when necessary
+- name: enable remote logging
   block:
     - name: apply rsyslog config
       template:
         src: ids_confg_snort_rsyslog.conf.j2
         dest: /etc/rsyslog.d/ids_confg_snort_rsyslog.conf
+        backup: true
+      notify:
+        - restart rsyslog
+  when: (ids_config_remote_log is defined) and ids_config_remote_log
+
+- name: disable remote logging
+  block:
+    - name: check for rsyslog config
+      stat:
+        path: /etc/rsyslog.d/ids_confg_snort_rsyslog.conf
+      register: st
+
+    - name: backup rsyslog config
+      copy:
+        src: /etc/rsyslog.d/ids_confg_snort_rsyslog.conf
+        dest: /etc/rsyslog.d/ids_confg_snort_rsyslog.conf.backup
+        remote_src: true
+        backup: true
+      when: st.stat.exists
+
+    - name: remove ids_config_snort_rsyslog.conf rsyslog config
+      file:
+        path: /etc/rsyslog.d/ids_confg_snort_rsyslog.conf
+        state: absent
+      when: st.stat.exists
       notify:
         - restart rsyslog
 
-  when: (ids_config_remote_log is defined) and ids_config_remote_log
-
+  when: (ids_config_remote_log is defined) and not ids_config_remote_log
