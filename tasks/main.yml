@@ -31,5 +31,3 @@
 - name: apply snort specific configs
   import_tasks: snort.yml
   when: ids_provider == 'snort'
-
-
