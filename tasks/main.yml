@@ -19,17 +19,20 @@
     msg: >
       Provided value for 'ids_config_remote_log_protocol' is not valid
       must be one of {{ ids_config_remote_log_valid_protocols }}
-  when: (ids_config_remote_log_protocol is defined) and (ids_config_remote_log_procotol not in ids_config_remote_log_valid_protocols)
+  when: >
+    (ids_config_remote_log_protocol is defined) and
+      (ids_config_remote_log_procotol
+        not in ids_config_remote_log_valid_protocols)
 
 - name: ensure remote host defined if remote logging enabled
   fail:
     msg: >
-      A value for 'ids_config_remote_log_destination' must be provided if enabling
-      remote logging
-  when: (ids_config_remote_log is defined) and ids_config_remote_log and (ids_config_remote_log_destination is not defined)
+      A value for 'ids_config_remote_log_destination' must be provided if
+      enabling remote logging
+  when: >
+    (ids_config_remote_log is defined) and ids_config_remote_log and
+      (ids_config_remote_log_destination is not defined)
 
 - name: apply snort specific configs
   import_tasks: snort.yml
   when: ids_provider == 'snort'
-
-
