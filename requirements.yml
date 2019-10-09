@@ -1,5 +1,5 @@
 ---
 - src: geerlingguy.repo-epel
 
-- src: https://github.com/ansible-security/ids_install.git
+- src: git+https://github.com/ansible-security/ids_install
   name: ids_install
