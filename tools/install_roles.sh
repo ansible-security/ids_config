@@ -17,7 +17,9 @@ TOOLSDIR=$(dirname $0)
 
 # NOTE(pabelanger): Check if we are running in the gate, if so use cached repos
 # to avoid hitting the network.
-if [ -f /etc/ci/mirror_info.sh ]; then
+if [ -d /etc/dib-manifests/ ]; then
+    # TODO(pabelanger): Have molecule support existing shell variables.
+    HOME=${HOME:-/home/zuul}
     sed -e "s|https://|file://${HOME}/src/|g" -i $TOOLSDIR/../requirements.yml
 fi
 
