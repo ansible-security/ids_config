@@ -545,6 +545,10 @@ include reference.config
 # site specific rules
 include $RULE_PATH/local.rules
 
+
+{% if ids_config_snort_community_rules_found is defined and ids_config_snort_community_rules_found %}
+include $RULE_PATH/community.rules
+{% endif %}
 #include $RULE_PATH/app-detect.rules
 #include $RULE_PATH/attack-responses.rules
 #include $RULE_PATH/backdoor.rules
