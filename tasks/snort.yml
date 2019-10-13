@@ -1,5 +1,15 @@
 ---
 
+- name: check for community.rules
+  stat:
+    path: '/etc/snort/rules/community.rules'
+  register: commr_st
+
+- name: set ids_config_snort_community_rules_found host fact
+  set_fact:
+    ids_config_snort_community_rules_found: true
+  when: (commr_st.stat.isdir is defined) and commr_st.stat.exists
+
 - name: apply config template for snort provider
   template:
     src: snort.conf.j2
