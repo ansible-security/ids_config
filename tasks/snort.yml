@@ -1,14 +1,11 @@
 ---
 
-- name: check for community.rules
-  stat:
-    path: '/etc/snort/rules/community.rules'
-  register: commr_st
-
-- name: set ids_config_snort_community_rules_found host fact
-  set_fact:
-    ids_config_snort_community_rules_found: true
-  when: (commr_st.stat.isdir is defined) and commr_st.stat.exists
+- name: find snort rules
+  find:
+    paths: "{{ ids_config_snort_rules_dir }}"
+    patterns: '*.rules'
+    recurse: true
+  register: ids_config_snort_rules_files
 
 - name: apply config template for snort provider
   template:
@@ -51,3 +48,9 @@
         - restart rsyslog
 
   when: (ids_config_remote_log is defined) and not ids_config_remote_log
+
+- name: ensure snort is started and enabled
+  service:
+    name: snort
+    state: started
+    enabled: true

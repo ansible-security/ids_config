@@ -58,6 +58,7 @@ specific provider.
 * `ids_config_snort_black_list_path`
 * `ids_config_snort_checksum_mode`
 * `ids_config_snort_alert_syslog`
+* `ids_config_snort_rules_dir`
 
 Dependencies
 ------------
